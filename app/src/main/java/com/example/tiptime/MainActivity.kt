@@ -21,6 +21,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -83,7 +84,7 @@ fun TipTimeLayout() {
     var tipInput by remember { mutableStateOf("")}
     val tipPercent = tipInput.toDoubleOrNull() ?: 15.0
 
-    val tip = caluclateTip(amount, tipPercent, roundUp)
+    val tip = calculateTip(amount, tipPercent, roundUp)
 
     Column(
         modifier = Modifier
@@ -199,8 +200,8 @@ fun RoundTheTipRow(
 
 }
 
-
-private fun caluclateTip(bill: Double,
+@VisibleForTesting
+internal fun calculateTip(bill: Double,
                          tipPercentage: Double = 15.0,
                          roundUp: Boolean
 ): String {
